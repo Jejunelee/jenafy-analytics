@@ -10,5 +10,8 @@ export function supabasePublishableKey() {
 }
 
 export function appUrl() {
-  return process.env.NEXT_PUBLIC_APP_URL || "https://stats.jenafy.com";
+  const raw = (process.env.NEXT_PUBLIC_APP_URL || "https://app.jenafy.com").trim();
+  const trimmed = raw.replace(/\/$/, "");
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
 }

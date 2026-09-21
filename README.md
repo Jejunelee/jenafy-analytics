@@ -1,6 +1,6 @@
 # Jenafy Analytics
 
-Self-hosted website analytics for properties you manage. Dashboard at `stats.jenafy.com`, tracker at `/tracker.js`.
+Self-hosted website analytics for properties you manage. Dashboard at `app.jenafy.com`, tracker at `/tracker.js`.
 
 ## Stack
 
@@ -12,8 +12,8 @@ Self-hosted website analytics for properties you manage. Dashboard at `stats.jen
 
 1. Copy `.env.example` to `.env.local` and fill values.
 2. In the Supabase dashboard:
-   - Auth → URL configuration: Site URL `https://stats.jenafy.com`
-   - Redirect URLs: `https://stats.jenafy.com/auth/callback` and `http://localhost:3000/auth/callback`
+   - Auth → URL configuration: Site URL `https://app.jenafy.com`
+   - Redirect URLs: `https://app.jenafy.com/auth/callback` and `http://localhost:3000/auth/callback`
 3. Optional: set `RESEND_API_KEY` and `RESEND_FROM` to email a join link. Invites always create a 72-hour code and join URL you can copy. Clients open `/join` and create a password.
 4. `npm run dev`
 
@@ -24,7 +24,7 @@ The first account that signs in becomes the **Owner**.
 ```html
 <script
   defer
-  src="https://stats.jenafy.com/tracker.js"
+  src="https://app.jenafy.com/tracker.js"
   data-site-id="SITE_ID">
 </script>
 ```
@@ -39,4 +39,4 @@ JenafyAnalytics.track("signup");
 
 ## Deploy
 
-Vercel: set the same env vars, attach domain `stats.jenafy.com`.
+Vercel: set the same env vars, attach domain `app.jenafy.com`.
