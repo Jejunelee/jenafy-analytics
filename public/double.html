@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Double tracker test</title>
+    <script defer src="/tracker.js" data-site-id="jn_testverify0001"></script>
+    <script defer src="/tracker.js" data-site-id="jn_testverify0001"></script>
+  </head>
+  <body>
+    <h1>Double include</h1>
+    <p id="status">waiting</p>
+    <script>
+      setTimeout(function () {
+        document.getElementById("status").textContent =
+          "JenafyAnalytics=" + typeof window.JenafyAnalytics;
+        if (window.JenafyAnalytics) window.JenafyAnalytics.track("double_test");
+      }, 800);
+    </script>
+  </body>
+</html>

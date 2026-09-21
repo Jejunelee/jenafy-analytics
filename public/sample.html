@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jenafy Analytics sample page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 0; line-height: 1.5; color: #0f172a; }
+      header { padding: 48px 24px; background: #0b1220; color: #fff; }
+      main { max-width: 720px; margin: 0 auto; padding: 32px 24px 120vh; }
+      button { background: #14b8a6; border: 0; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+      a { color: #0f766e; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <p>Sample site</p>
+      <h1>Click, scroll, and navigate to generate analytics</h1>
+    </header>
+    <main>
+      <p>This page is for verifying Jenafy Analytics. Open it with a tracker snippet that uses your Site ID.</p>
+      <p>
+        <a href="/sample.html">Same page (SPA-style)</a>
+        ·
+        <a href="/sample.html?utm_source=newsletter&utm_medium=email&utm_campaign=test">UTM link</a>
+      </p>
+      <p><button type="button" onclick="window.JenafyAnalytics && JenafyAnalytics.track('sample_click')">Send custom event</button></p>
+      <p>Keep scrolling to record scroll depth.</p>
+    </main>
+  </body>
+</html>
