@@ -29,6 +29,7 @@ export function JoinForm({
   return (
     <AuthCard title="Create your password" subtitle={subtitle}>
       <form action={action} className="space-y-4">
+        <fieldset disabled={pending} className="space-y-4 disabled:opacity-70">
         <label className="block text-[15px] text-ink">
           <span className="inline-flex items-center">
             Invite code
@@ -84,8 +85,9 @@ export function JoinForm({
           <p className="text-sm text-deep">This invite is invalid or expired.</p>
         ) : null}
         <button type="submit" disabled={pending} className="btn w-full">
-          {pending ? "Creating account…" : "Create password"}
+          {pending ? "Creating account" : "Create password"}
         </button>
+        </fieldset>
       </form>
       <p className="mt-6 text-sm text-muted">
         Already joined?{" "}

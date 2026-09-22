@@ -78,14 +78,28 @@ body {
   padding: 10px 16px;
   font-size: 15px;
   color: var(--cream);
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.08s ease, opacity 0.12s ease;
 }
 
 .btn:hover {
   background: color-mix(in srgb, var(--ink) 92%, var(--cream));
 }
 
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+  background: color-mix(in srgb, var(--ink) 78%, var(--cream));
+}
+
 .btn:disabled {
+  cursor: not-allowed;
   opacity: 0.55;
+}
+
+button,
+a,
+select {
+  cursor: pointer;
 }
 
 .field {

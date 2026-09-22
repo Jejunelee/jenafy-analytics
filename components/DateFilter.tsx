@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FieldHint } from "@/components/FieldHint";
+import { SubmitButton } from "@/components/SubmitButton";
 import type { RangeKey } from "@/lib/dates";
 import { addDays, ymd } from "@/lib/dates";
 
@@ -36,6 +37,7 @@ export function DateFilter({
               ? "bg-ink text-cream"
               : "bg-cream text-muted ring-1 ring-ink/10 hover:text-ink"
           }`}
+          aria-current={current === r.key ? "page" : undefined}
         >
           {r.label}
         </Link>
@@ -57,9 +59,12 @@ export function DateFilter({
           defaultValue={toVal}
           required
         />
-        <button className="rounded-lg bg-cream px-2 py-1 ring-1 ring-ink/15" type="submit">
+        <SubmitButton
+          className="rounded-lg bg-cream px-2 py-1 ring-1 ring-ink/15"
+          pendingLabel="Applying"
+        >
           Apply
-        </button>
+        </SubmitButton>
         <FieldHint label="How date ranges work">
           Presets compare against the previous period of the same length. Custom dates include both start and end days.
         </FieldHint>

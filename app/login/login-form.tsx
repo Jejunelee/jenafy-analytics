@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { AuthCard, authInputClass } from "@/components/AuthCard";
 import { FieldHint } from "@/components/FieldHint";
+import { SubmitButton } from "@/components/SubmitButton";
 import { sendMagicLink, signInWithPassword } from "./actions";
 
 const errorCopy: Record<string, string> = {
@@ -14,20 +15,7 @@ const errorCopy: Record<string, string> = {
 };
 
 export function LoginForm({ error }: { error?: string }) {
-  const [mounted, setMounted] = useState(false);
   const [magic, setMagic] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return (
-      <AuthCard
-        title="Sign in"
-        subtitle="Use the password you created when you joined."
-      >
-        <div className="h-48 rounded-lg bg-ink/5" aria-hidden="true" />
-      </AuthCard>
-    );
-  }
 
   if (magic) {
     return (
@@ -50,9 +38,9 @@ export function LoginForm({ error }: { error?: string }) {
           {error ? (
             <p className="text-sm text-deep">{errorCopy[error] || errorCopy.send}</p>
           ) : null}
-          <button type="submit" className="btn w-full">
+          <SubmitButton className="btn w-full" pendingLabel="Sending">
             Send sign-in link
-          </button>
+          </SubmitButton>
           <button
             type="button"
             className="w-full text-sm text-muted hover:text-ink"
@@ -98,9 +86,9 @@ export function LoginForm({ error }: { error?: string }) {
         {error ? (
           <p className="text-sm text-deep">{errorCopy[error] || errorCopy.invalid}</p>
         ) : null}
-        <button type="submit" className="btn w-full">
+        <SubmitButton className="btn w-full" pendingLabel="Signing in">
           Sign in
-        </button>
+        </SubmitButton>
       </form>
       <p className="mt-6 text-sm text-muted">
         Have an invite code?{" "}

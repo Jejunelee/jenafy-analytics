@@ -4,6 +4,7 @@ import { CopyButton } from "@/components/CopyButton";
 import { FieldHint } from "@/components/FieldHint";
 import { PageHeader } from "@/components/PageHeader";
 import { TeamInviteForms } from "@/components/TeamInviteForms";
+import { SubmitButton } from "@/components/SubmitButton";
 import { requireWebsite } from "@/lib/auth";
 import { formatInviteCode, joinPath } from "@/lib/invite";
 import { requestOrigin } from "@/lib/origin";
@@ -18,10 +19,19 @@ export default async function TeamPage({
   if (profile.global_role !== "owner") redirect(`/sites/${id}`);
   const origin = await requestOrigin();
 
-  const { data: members } = await supabase
-    .from("website_members")
-    .select("user_id, role")
-    .eq("website_id", website.id);
+  const [{ data: members }, { data: codes }] = await Promise.all([
+    supabase
+      .from("website_members")
+      .select("user_id, role")
+      .eq("website_id", website.id),
+    supabase
+      .from("invite_codes")
+      .select("id, code, email, expires_at, redeemed_at")
+      .eq("website_id", website.id)
+      .is("redeemed_at", null)
+      .gt("expires_at", new Date().toISOString())
+      .order("created_at", { ascending: false }),
+  ]);
 
   const ids = (members || []).map((m) => m.user_id);
   const { data: people } = ids.length
@@ -29,14 +39,6 @@ export default async function TeamPage({
     : { data: [] as { id: string; email: string }[] };
 
   const emailById = new Map((people || []).map((p) => [p.id, p.email]));
-
-  const { data: codes } = await supabase
-    .from("invite_codes")
-    .select("id, code, email, expires_at, redeemed_at")
-    .eq("website_id", website.id)
-    .is("redeemed_at", null)
-    .gt("expires_at", new Date().toISOString())
-    .order("created_at", { ascending: false });
 
   return (
     <div className="space-y-6">
@@ -61,9 +63,9 @@ export default async function TeamPage({
                 <form action={removeMember}>
                   <input type="hidden" name="id" value={website.id} />
                   <input type="hidden" name="user_id" value={m.user_id} />
-                  <button className="text-sm text-deep" type="submit">
+                  <SubmitButton className="text-sm text-deep" pendingLabel="Removing">
                     Remove
-                  </button>
+                  </SubmitButton>
                 </form>
               ) : (
                 <span className="text-xs text-muted">You</span>
@@ -105,9 +107,9 @@ export default async function TeamPage({
                     <form action={revokeInviteCode}>
                       <input type="hidden" name="id" value={website.id} />
                       <input type="hidden" name="code_id" value={c.id} />
-                      <button className="text-sm text-deep" type="submit">
+                      <SubmitButton className="text-sm text-deep" pendingLabel="Revoking">
                         Revoke
-                      </button>
+                      </SubmitButton>
                     </form>
                   </div>
                 </div>

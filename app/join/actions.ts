@@ -36,16 +36,6 @@ export async function joinWithInvite(
     return { error: "That invite code is invalid or has expired." };
   }
 
-  const { error: signUpError } = await supabase.auth.signUp({
-    email,
-    password,
-  });
-  const already =
-    !!signUpError && /already|registered|exists/i.test(signUpError.message);
-  if (signUpError && !already) {
-    return { error: signUpError.message };
-  }
-
   const { data: prepared } = await supabase.rpc("prepare_invited_user", {
     p_code: code,
     p_email: email,
@@ -55,7 +45,7 @@ export async function joinWithInvite(
   if (!prep?.ok) {
     const map: Record<string, string> = {
       invalid: "That invite code is invalid or has expired.",
-      missing: "Could not create the account. Try again.",
+      missing: "Enter a valid email.",
       owner: "This email is the owner account. Sign in with an email link instead.",
       weak: "Use a password of at least 8 characters.",
     };

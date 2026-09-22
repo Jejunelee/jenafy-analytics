@@ -1,5 +1,6 @@
 import { FieldHint } from "@/components/FieldHint";
 import { PageHeader } from "@/components/PageHeader";
+import { SubmitButton } from "@/components/SubmitButton";
 import { requireUser } from "@/lib/auth";
 import { createWebsite } from "../actions";
 
@@ -48,9 +49,7 @@ export default async function NewSitePage({
           </span>
         </label>
         {error ? <p className="text-sm text-deep">{error}</p> : null}
-        <button className="btn" type="submit">
-          Create
-        </button>
+        <SubmitButton pendingLabel="Creating">Create</SubmitButton>
       </form>
     </div>
   );

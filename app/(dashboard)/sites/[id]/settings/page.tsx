@@ -3,6 +3,7 @@ import { updateWebsite } from "../../actions";
 import { DeleteSiteButton } from "@/components/DeleteSiteButton";
 import { FieldHint } from "@/components/FieldHint";
 import { PageHeader } from "@/components/PageHeader";
+import { SubmitButton } from "@/components/SubmitButton";
 import { requireWebsite } from "@/lib/auth";
 
 export default async function SettingsPage({
@@ -43,9 +44,7 @@ export default async function SettingsPage({
             This ID is baked into the tracker snippet. Keep using the same snippet even if you rename the site.
           </FieldHint>
         </p>
-        <button className="btn" type="submit">
-          Save
-        </button>
+        <SubmitButton pendingLabel="Saving">Save</SubmitButton>
       </form>
       <div className="rounded-2xl border border-deep/30 bg-cream p-6">
         <p className="text-sm text-deep">Remove this website and all of its analytics.</p>

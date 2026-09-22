@@ -71,7 +71,7 @@ export function TeamInviteForms({ websiteId }: { websiteId: string }) {
           className="field mt-0 flex-1"
         />
         <button className="btn disabled:opacity-60" disabled={pending} type="submit">
-          {pending ? "Creating…" : "Create invite"}
+          {pending ? "Creating" : "Create invite"}
         </button>
       </div>
       <InviteResult state={state} />

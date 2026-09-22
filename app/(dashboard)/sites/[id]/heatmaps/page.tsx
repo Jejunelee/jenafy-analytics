@@ -1,4 +1,5 @@
 import { DateFilter } from "@/components/DateFilter";
+import { SubmitButton } from "@/components/SubmitButton";
 import { EmptyState } from "@/components/ui";
 import { HeatmapView } from "@/components/HeatmapView";
 import { PageHeader } from "@/components/PageHeader";
@@ -148,9 +149,7 @@ export default async function HeatmapsPage({
             <option value="scroll">Scroll</option>
           </select>
         </label>
-        <button className="btn" type="submit">
-          View
-        </button>
+        <SubmitButton pendingLabel="Loading">View</SubmitButton>
       </form>
 
       {empty ? (

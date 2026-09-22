@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { SubmitButton } from "@/components/SubmitButton";
 import { signOut } from "@/app/login/actions";
 import type { Profile, Website } from "@/lib/auth";
 import { SiteSwitcher } from "@/components/SiteSwitcher";
@@ -102,9 +103,9 @@ export function AppShell({
         <p className="truncate text-cream">{profile.email}</p>
         <p className="mt-0.5 capitalize">{profile.global_role}</p>
         <form action={signOut} className="mt-3">
-          <button className="text-cream hover:text-pink" type="submit">
+          <SubmitButton className="text-cream hover:text-pink" pendingLabel="Signing out">
             Sign out
-          </button>
+          </SubmitButton>
         </form>
       </div>
     </div>
